@@ -1,4 +1,4 @@
-module goCacheStore
+module github.com/Ankush-Hegde/goCacheStore
 
 go 1.22.0
 
