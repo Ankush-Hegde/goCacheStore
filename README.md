@@ -1,42 +1,49 @@
 # goCacheStore
 
-### Installation
+## Installation
 
-# Run <code>go get github.com/Ankush-Hegde/goCacheStore</code>
+Run <code>go get github.com/Ankush-Hegde/goCacheStore</code> from command line.
 
-### Usage
+## Usage
 
-<code> Cache "github.com/Ankush-Hegde/goCacheStore" </code>
+```
+import (
+	Cache "github.com/Ankush-Hegde/goCacheStore"
+)
+```
 
-for database cache storage:
-<code>
-		_, cacheErr := Cache.MySQL(<<DbEndpoint>>, "<<tablename>>", "/", <<SessionLifetime>>, []byte("<SecretKey>"))
+### for database cache storage
+
+```
+DbEndpoint := UN:PASS@tcp(<IP>:<PORT>)/<DB>?parseTime=true&loc=Local
+SessionLifetimeInSec := 1598453
+
+_, cacheErr := Cache.MySQL(DbEndpoint, "tablename", "/", SessionLifetimeInSec, []byte("<SecretKey>"))
 
 		if cacheErr != nil {
-            return cacheErr
+            		return cacheErr
 		}
-
 		if cacheErr != nil {
 			defer Cache.DatabaseCacheStore.Close()
 		}
-</code>
+```
 
-for filebased cache storage
-<code>
-		CacheFilePath := filepath.Join("path", "to_store_file")
+### for filebased cache storage
+```
+CacheFilePath := filepath.Join("path", "to_store_file")
+SessionLifetimeInSec := 1598453
 
-		Cache.File(CacheFilePath, "/", Config.SessionLifetime, []byte("<SecretKey>"))
-</code>
-
-below is the code to create, get and forget the cache data,
-key must be unique,
-data must be the map[string]interface{},
-time must be the int in sec,
-
-<code>
+Cache.File(CacheFilePath, "/", SessionLifetimeInSec, []byte("<SecretKey>"))
+```
+### below is the code to create, get and forget the cache data,<br>
+```
 Cache.CacheStorage.New(key, data, time)
 
-Cache.CacheStorage.Get(key)
+data := Cache.CacheStorage.Get(key)
 
 Cache.CacheStorage.Forget(key)
-</code>
+```
+### note:-
+key must be unique string,<br>
+data must be the map[string]interface{},<br>
+time must be the int in sec,<br>
