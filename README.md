@@ -46,4 +46,7 @@ Cache.CacheStorage.Forget(key)
 ### note:-
 key must be unique string,<br>
 data must be the map[string]interface{},<br>
-time must be the int in sec,<br>
+time must be in sec(int),<br>
+
+### link:-
+https://pkg.go.dev/github.com/Ankush-Hegde/goCacheStore
